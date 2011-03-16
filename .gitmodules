@@ -1,0 +1,3 @@
+[submodule "payload"]
+	path = payload
+	url = git://github.com/granberro/payload.git
