@@ -3,14 +3,15 @@ CFLAGS = -Wall -O3
 
 
 
-PPU_CC = $(PS3_COMPILERS)/ppu-gcc
-PPU_OBJCOPY = $(PS3_COMPILERS)/ppu-objcopy
+PPU_CC = ppu-gcc
+PPU_OBJCOPY = ppu-objcopy
 REMOVE = rm -f
 REMOVEDIR = rm -rf
 
 OBJDIR = .
 
 PLOBJDIR = .
+DATA = ../data
 
 PLSRC = payload_groove_hermes.S
 
@@ -32,6 +33,9 @@ port1_config_descriptor.o: $(wildcard payload_*.S)
 %.bin : %.o
 	$(PPU_OBJCOPY) -O binary $< $@
 
+copy: 
+	@cp $(PLOBJDIR)/payload_groove_hermes.bin $(DATA)
+	
 # Target: clean project.
 clean:
 	$(REMOVE) $(PLSRC:%.S=$(PLOBJDIR)/%.o)

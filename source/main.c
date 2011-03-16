@@ -13,8 +13,8 @@
 
 #include <sysmodule/sysmodule.h>
 // for msgdialogs
+#include <io/msg.h>
 #include "sysutil/events.h"
-#include "sysutil/msgdialog.h"
 
 #include <io/pad.h>
 
@@ -194,7 +194,7 @@ void LoadTexture()
 
 volatile int dialog_action = 0;
 
-void my_dialog(msgbutton button, void *userdata)
+void my_dialog(msgButton button, void *userdata)
 {
     switch(button) {
 
@@ -451,9 +451,9 @@ s32 main(s32 argc, const char* argv[])
 
                     sys8_sys_configure(CFG_UNPATCH_APPVER + (patch_app_ver!=0));
                     
-                    msgtype mdialogyesno = MSGDIALOG_NORMAL | MSGDIALOG_BUTTON_TYPE_YESNO | MSGDIALOG_DISABLE_CANCEL_ON | MSGDIALOG_DEFAULT_CURSOR_NO;
+                    msgType mdialogyesno = MSGDIALOG_NORMAL | MSGDIALOG_BUTTON_TYPE_YESNO | MSGDIALOG_DISABLE_CANCEL_ON | MSGDIALOG_DEFAULT_CURSOR_NO;
 
-                    MsgDialogOpen(mdialogyesno, "Select YES to load EBOOT.BIN from:\n/dev_usb/ps3game", my_dialog, (void *) 0x11110001, NULL);
+                    msgDialogOpen2(mdialogyesno, "Select YES to load EBOOT.BIN from:\n/dev_usb/ps3game", my_dialog, (void *) 0x11110001, NULL);
 
                     dialog_action = 0;
 
@@ -462,7 +462,7 @@ s32 main(s32 argc, const char* argv[])
                         sysCheckCallback();tiny3d_Flip();
                         }
 
-                    MsgDialogClose();
+                    msgDialogClose();
 
                     // use USB redirection
                     if(dialog_action == 1) {

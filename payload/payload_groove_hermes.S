@@ -1339,7 +1339,6 @@ sys8_lv1call: // system_call_2(8, 11, input_reg_table, output_reg_table)
 
  aDev_bdvd:	
 	.string "/dev_bdvd"
-	
  aMod:  
 	.string "mod"
 
